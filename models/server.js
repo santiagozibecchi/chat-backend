@@ -7,11 +7,15 @@ import { Server as SocketServer } from "socket.io";
 import { __dirname } from "../util.js";
 
 import Sockets from "./sockets.js";
+import { dbConnection } from "../database/config.js";
 
 export default class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT;
+
+    // Coneccion a la DB
+    dbConnection();
 
     // Http server
     this.server = http.createServer(this.app);
