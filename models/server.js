@@ -9,6 +9,9 @@ import { __dirname } from "../util.js";
 import Sockets from "./sockets.js";
 import { dbConnection } from "../database/config.js";
 
+// middleware autenticacion
+import auth from "../router/auth.js";
+
 export default class Server {
   constructor() {
     this.app = express();
@@ -29,6 +32,11 @@ export default class Server {
   middlewares() {
     // Desplegar el directorio público
     this.app.use(express.static(path.resolve(__dirname, "../public")));
+
+    // TODO CORS
+
+    // API endpoints
+    this.app.use("/api/login", auth);
   }
 
   // Esta configuración se puede tener aquí o como propieda de clase
